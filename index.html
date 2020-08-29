@@ -14,6 +14,23 @@
         margin: 0 auto;
         max-width: 1100px;
       }
+      .row { 
+        display: flex;
+      }
+      .col {
+        width: 49%;
+      }
+      .col:first-child {
+        margin-right: auto;
+      }
+      .col:last-child {
+        margin-left: auto;
+      }
+      img {
+        display: block;
+        height: auto;
+        max-width: 100%;
+      }
       .canvas-wrapper {
         border: 1px solid gray;
         height: 0;
@@ -43,78 +60,105 @@
         <li>Higher level of proficiency in (re)creating art in Canvas</li>
         <li>Deeper understanding of Canvas Context and transformations</li>
       </ul>
-<!--
-      <p>Value</p>
-      <p>Construction</p>
-      <p>Perspective</p>
--->
-<!--
       <section>
-        <h2>Form</h2>
-        <div class="canvas-wrapper">
-          <canvas aria-label='Drawing of basic forms'
-                  id='canvas-form'
-                  role='img'>
-          </canvas>
-        </div>
-      </section>
--->
-      <section>
-        <h2>Shape</h2>
-        <div class="canvas-wrapper">
-          <canvas aria-label='Drawing of basic shapes'
-                  id='canvas-shape'
-                  role='img'>
-          </canvas>
+        <h2>Simplified Graphics</h2>
+        <div class="row">
+            <div class="col">
+                <img src='./img/atlassian-jira.png' alt='Interface graphics by Atlassian' />
+            </div>
+            <div class="col">
+                <div class="canvas-wrapper">
+                  <canvas aria-label='Programmatic copy of Atlassian interface graphics'
+                          id='target'
+                          role='img'>
+                  </canvas>
+                </div>
+            </div>
         </div>
       </section>
     </div>
   </body>
+
   <script>
     'use strict';
 
-    function Canvas(el){
-        this.el = el;
+    function Canvas(canvas){
+        this.ctx = canvas.getContext('2d');
+        this.ctx.canvas.width = canvas.clientWidth;
+        this.ctx.canvas.height = canvas.clientHeight;
+        this.shapes = [];
     }
-      
-    Canvas.prototype.drawCircle = function(options){
+ 
+    Canvas.prototype.clearCanvas = function() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height,);
+    };
+
+    Canvas.prototype.drawEllipse = function(options){
+        console.log(drawEllipse);
+        // what parameters do i need
         // need x, y, color ... size?
     };
-      
+
     Canvas.prototype.drawRectangle = function(options){
-        // returns a perfectly drawn rectangle at 
-        // given location
-        // specs
+        console.log('drawRectangle', options);
+
+        this.ctx.fillRect(
+            options.x ? options.x : 0,
+            options.y ? options.y : 0,
+            options.width ? options.width : 0,
+            options.height ? options.height : 0,
+        );
+
+        this.ctx.strokeRect(
+            options.x ? options.x : 0,
+            options.y ? options.y : 0,
+            options.width ? options.width : 0,
+            options.height ? options.height : 0,
+       );
     };
-      
+
     Canvas.prototype.drawLine = function(options){
         // returns a line from x1y1 to x2y2
     };
+
+    Canvas.prototype.setupContext = function(options){
+        for(var key in options) {
+            if(options.hasOwnProperty(key)){
+                if(this.ctx[key]){
+                    this.ctx[key] = options[key];   
+                }
+            }
+        }        
+    };
+        
+    Canvas.prototype.drawShape = function(options){
+        this.shapes.push(options);
+        this.setupContext(options);
+
+        switch(options._shapeType) {
+            case 'line':
+                this.drawLine(options);
+                break;
+            case 'rectangle':
+                this.drawRectangle(options);
+                break;
+            case 'ellipse':
+                this.drawEllipse(options);
+                break;
+            default:
+                break;
+        }
+    };
       
-//    Canvas.prototype.Shape = function(options){
-//        var shape; // each shape saved as an object?
-//        
-//        switch(options.shapeType) {
-//            case 'line':
-//                shape = 'line';
-//                break;
-//            case 'rectangle':
-//                shape = 'rectangle';
-//                break;
-//            default:
-//                shape = 'point';
-//                break;
-//        }        
-//    };
-      
+    var cManager = {};
     var canvases = document.querySelectorAll('canvas');
-    var canvasesArray = [];
 
     for(var i = 0; i < canvases.length; i++){
-        canvasesArray.push(new Canvas(canvases[i]));
+        cManager[canvases[i].getAttribute('id')] = new Canvas(canvases[i]); 
     }
       
-    console.log(canvasesArray);
-
+//  cManager['canvas-shape']
+    
+    console.log(cManager);
   </script>
 </html>
