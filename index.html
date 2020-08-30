@@ -14,7 +14,7 @@
         margin: 0 auto;
         max-width: 1100px;
       }
-      .row { 
+      .row {
         display: flex;
       }
       .col {
@@ -61,12 +61,14 @@
         <li>Deeper understanding of Canvas Context and transformations</li>
       </ul>
       <section>
-        <h2>Simplified Graphics</h2>
         <div class="row">
             <div class="col">
+                <h2>Reference</h2>
                 <img src='./img/atlassian-jira.png' alt='Interface graphics by Atlassian' />
+                <img src='./img/walmart.png' alt='Interface graphics by Atlassian' />
             </div>
             <div class="col">
+                <h2>Canvas Drawings</h2>
                 <div class="canvas-wrapper">
                   <canvas aria-label='Programmatic copy of Atlassian interface graphics'
                           id='target'
@@ -85,7 +87,7 @@
     (function(){
       var canvas = document.querySelector('canvas');
       var ctx = canvas.getContext('2d');
-      
+
       canvas.width = canvas.clientWidth;
       canvas.height = canvas.clientHeight;
 
@@ -93,7 +95,7 @@
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(0,0,canvas.width, canvas.height);
       }
-      
+
       function drawGrid() {
         function drawLine(){
           ctx.beginPath();
@@ -114,9 +116,9 @@
             drawLine();
           }
 
-          ctx.restore();          
+          ctx.restore();
         }
-        
+
         function drawVerticalLines(){
           ctx.save();
           ctx.strokeStyle = '#dddddd';
@@ -133,7 +135,7 @@
 
           ctx.restore();
         }
-        
+
         var gridSpacer = 10;
 
         drawHorizontalLines();
@@ -142,11 +144,11 @@
 
       function drawCheckmark(x, y, size){
         ctx.save();
-        
+
         var unit = size / 4;
-        
+
         ctx.translate(x, y);
-        
+
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.lineTo(unit, unit);
@@ -155,10 +157,10 @@
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
         ctx.lineWidth = size / 8;
-        ctx.stroke();        
+        ctx.stroke();
         ctx.restore();
       }
-      
+
       function drawRoundedRectangle(x, y, width, height, radius){
         var box = {
           color: 'gray',
@@ -189,7 +191,7 @@
               },
               e: {
                 x: this.origin.x + this.getLengthX(),
-                y: this.origin.y + this.radius + this.getLengthY() + this.radius, 
+                y: this.origin.y + this.radius + this.getLengthY() + this.radius,
               },
               f: {
                 x: this.origin.x,
@@ -197,7 +199,7 @@
               },
               g: {
                 x: this.origin.x - this.radius,
-                y: this.origin.y + this.radius + this.getLengthY(), 
+                y: this.origin.y + this.radius + this.getLengthY(),
               },
               h: {
                 x: this.origin.x - this.radius,
@@ -235,7 +237,7 @@
 
         ctx.save();
         ctx.translate(box.radius, 0);
-        
+
         ctx.beginPath();
         ctx.moveTo(box.points().a.x, box.points().a.y);
         ctx.lineTo(box.points().b.x, box.points().b.y);
@@ -273,14 +275,14 @@
           box.controlPoints().topLeft.x,
           box.controlPoints().topLeft.y,
           box.points().a.x,
-          box.points().a.y,  
+          box.points().a.y,
         );
-        
+
         ctx.fillStyle = '#f3f3f3';
-        ctx.fill();        
+        ctx.fill();
         ctx.restore();
       }
-      
+
       function drawCheckbox(x, y, size) {
         drawRoundedRectangle(x, y, size, size, size/10);
         drawCheckmark(x + size/3.25, y + size/2, size/2);
@@ -289,6 +291,6 @@
       drawBackground();
       drawGrid();
       drawCheckbox(90, 90, 100);
-    }());    
+    }());
   </script>
 </html>
