@@ -139,9 +139,24 @@
         drawHorizontalLines();
         drawVerticalLines();
       }
-      
-      function drawCheckmark(){
+
+      function drawCheckmark(x, y, size){
+        ctx.save();
         
+        var unit = size / 4;
+        
+        ctx.translate(x, y);
+        
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(unit, unit);
+        ctx.lineTo(unit + unit + unit, - unit);
+
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        ctx.lineWidth = size / 8;
+        ctx.stroke();        
+        ctx.restore();
       }
       
       function drawRoundedRectangle(x, y, width, height, radius){
@@ -219,7 +234,7 @@
         };
 
         ctx.save();
-        ctx.translate(10, 0);
+        ctx.translate(box.radius, 0);
         
         ctx.beginPath();
         ctx.moveTo(box.points().a.x, box.points().a.y);
@@ -265,11 +280,15 @@
         ctx.fill();        
         ctx.restore();
       }
+      
+      function drawCheckbox(x, y, size) {
+        drawRoundedRectangle(x, y, size, size, size/10);
+        drawCheckmark(x + size/3.25, y + size/2, size/2);
+      }
 
       drawBackground();
       drawGrid();
-      drawRoundedRectangle(30, 30, 100, 200, 20);
-      
+      drawCheckbox(90, 90, 100);
     }());    
   </script>
 </html>
