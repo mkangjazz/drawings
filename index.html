@@ -82,83 +82,194 @@
   <script>
     'use strict';
 
-    function Canvas(canvas){
-        this.ctx = canvas.getContext('2d');
-        this.ctx.canvas.width = canvas.clientWidth;
-        this.ctx.canvas.height = canvas.clientHeight;
-        this.shapes = [];
-    }
- 
-    Canvas.prototype.clearCanvas = function() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height,);
-    };
+    (function(){
+      var canvas = document.querySelector('canvas');
+      var ctx = canvas.getContext('2d');
+      
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
 
-    Canvas.prototype.drawEllipse = function(options){
-        console.log(drawEllipse);
-        // what parameters do i need
-        // need x, y, color ... size?
-    };
-
-    Canvas.prototype.drawRectangle = function(options){
-        console.log('drawRectangle', options);
-
-        this.ctx.fillRect(
-            options.x ? options.x : 0,
-            options.y ? options.y : 0,
-            options.width ? options.width : 0,
-            options.height ? options.height : 0,
-        );
-
-        this.ctx.strokeRect(
-            options.x ? options.x : 0,
-            options.y ? options.y : 0,
-            options.width ? options.width : 0,
-            options.height ? options.height : 0,
-       );
-    };
-
-    Canvas.prototype.drawLine = function(options){
-        // returns a line from x1y1 to x2y2
-    };
-
-    Canvas.prototype.setupContext = function(options){
-        for(var key in options) {
-            if(options.hasOwnProperty(key)){
-                if(this.ctx[key]){
-                    this.ctx[key] = options[key];   
-                }
-            }
-        }        
-    };
-        
-    Canvas.prototype.drawShape = function(options){
-        this.shapes.push(options);
-        this.setupContext(options);
-
-        switch(options._shapeType) {
-            case 'line':
-                this.drawLine(options);
-                break;
-            case 'rectangle':
-                this.drawRectangle(options);
-                break;
-            case 'ellipse':
-                this.drawEllipse(options);
-                break;
-            default:
-                break;
+      function drawBackground() {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0,0,canvas.width, canvas.height);
+      }
+      
+      function drawGrid() {
+        function drawLine(){
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(canvas.width * 2, 0);
+          ctx.stroke();
         }
-    };
-      
-    var cManager = {};
-    var canvases = document.querySelectorAll('canvas');
 
-    for(var i = 0; i < canvases.length; i++){
-        cManager[canvases[i].getAttribute('id')] = new Canvas(canvases[i]); 
-    }
+        function drawHorizontalLines(){
+          ctx.save();
+          ctx.strokeStyle = '#dddddd';
+          ctx.strokeWidth = 1;
+
+          var horizontalLineCount = Math.ceil(canvas.height / gridSpacer);
+
+          for(var i = 0; i < horizontalLineCount; i++){
+            ctx.translate(0, gridSpacer);
+            drawLine();
+          }
+
+          ctx.restore();          
+        }
+        
+        function drawVerticalLines(){
+          ctx.save();
+          ctx.strokeStyle = '#dddddd';
+          ctx.strokeWidth = 1;
+          ctx.translate(canvas.width, 0);
+          ctx.rotate(90 * Math.PI/180);
+
+          var verticalLineCount = Math.ceil(canvas.width / gridSpacer);
+
+          for(var i = 0; i < verticalLineCount; i++){
+            ctx.translate(0, gridSpacer);
+            drawLine();
+          }
+
+          ctx.restore();
+        }
+        
+        var gridSpacer = 10;
+
+        drawHorizontalLines();
+        drawVerticalLines();
+      }
       
-//  cManager['canvas-shape']
-    
-    console.log(cManager);
+      function drawCheckmark(){
+        
+      }
+      
+      function drawRoundedRectangle(x, y, width, height, radius){
+        var box = {
+          color: 'gray',
+          width: width,
+          height: height,
+          origin: {
+            x: x,
+            y: y,
+          },
+          radius: radius,
+          points: function(){
+            return {
+              a: {
+                x: this.origin.x,
+                y: this.origin.y,
+              },
+              b: {
+                x: this.origin.x + this.getLengthX(),
+                y: this.origin.y,
+              },
+              c: {
+                x: this.origin.x + this.getLengthX() + this.radius,
+                y: this.origin.y + this.radius,
+              },
+              d: {
+                x: this.origin.x + this.getLengthX() + this.radius,
+                y: this.origin.y + this.radius + this.getLengthY(),
+              },
+              e: {
+                x: this.origin.x + this.getLengthX(),
+                y: this.origin.y + this.radius + this.getLengthY() + this.radius, 
+              },
+              f: {
+                x: this.origin.x,
+                y: this.origin.y + this.radius + this.getLengthY() + this.radius,
+              },
+              g: {
+                x: this.origin.x - this.radius,
+                y: this.origin.y + this.radius + this.getLengthY(), 
+              },
+              h: {
+                x: this.origin.x - this.radius,
+                y: this.origin.y + this.radius,
+              },
+            };
+          },
+          controlPoints: function(){
+            return {
+              topLeft: {
+                x: this.origin.x - this.radius,
+                y: this.origin.y,
+              },
+              topRight: {
+                x: this.origin.x + this.getLengthX() + this.radius,
+                y: this.origin.y,
+              },
+              bottomRight: {
+                x: this.origin.x + this.getLengthX() + this.radius,
+                y: this.origin.y + this.radius + this.getLengthY() + this.radius,
+              },
+              bottomLeft: {
+                x: this.origin.x - this.radius,
+                y: this.origin.y + this.radius + this.getLengthY() + this.radius,
+              },
+            };
+          },
+          getLengthX: function(){
+            return (this.width - this.radius - this.radius);
+          },
+          getLengthY: function(){
+            return (this.height - this.radius - this.radius);
+          },
+        };
+
+        ctx.save();
+        ctx.translate(10, 0);
+        
+        ctx.beginPath();
+        ctx.moveTo(box.points().a.x, box.points().a.y);
+        ctx.lineTo(box.points().b.x, box.points().b.y);
+        ctx.quadraticCurveTo(
+          box.controlPoints().topRight.x,
+          box.controlPoints().topRight.y,
+          box.points().c.x,
+          box.points().c.y,
+        );
+        ctx.lineTo(
+          box.points().d.x,
+          box.points().d.y,
+        );
+        ctx.quadraticCurveTo(
+          box.controlPoints().bottomRight.x,
+          box.controlPoints().bottomRight.y,
+          box.points().e.x,
+          box.points().e.y,
+        );
+        ctx.lineTo(
+          box.points().f.x,
+          box.points().f.y,
+        );
+        ctx.quadraticCurveTo(
+          box.controlPoints().bottomLeft.x,
+          box.controlPoints().bottomLeft.y,
+          box.points().g.x,
+          box.points().g.y,
+        );
+        ctx.lineTo(
+          box.points().h.x,
+          box.points().h.y,
+        );
+        ctx.quadraticCurveTo(
+          box.controlPoints().topLeft.x,
+          box.controlPoints().topLeft.y,
+          box.points().a.x,
+          box.points().a.y,  
+        );
+        
+        ctx.fillStyle = '#f3f3f3';
+        ctx.fill();        
+        ctx.restore();
+      }
+
+      drawBackground();
+      drawGrid();
+      drawRoundedRectangle(30, 30, 100, 200, 20);
+      
+    }());    
   </script>
 </html>
