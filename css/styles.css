@@ -1,0 +1,41 @@
+html, body {
+  font-family: 'Open Sans', sans-serif;
+}
+.container {
+  margin: 0 auto;
+  max-width: 1100px;
+}
+.row {
+  display: flex;
+}
+.col {
+  width: 49%;
+}
+.col:first-child {
+  margin-right: auto;
+}
+.col:last-child {
+  margin-left: auto;
+}
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+.canvas-wrapper {
+  border: 1px solid gray;
+  height: 0;
+  padding: 0 0 200%;
+  position: relative;
+  width: 100%;
+}
+canvas {
+  bottom: 0;
+  display: block;
+  left: 0;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
