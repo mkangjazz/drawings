@@ -8,21 +8,26 @@ Canvas.prototype.drawCheckmark = function(options){
   var size = this.getSizes(updatedOptions.size);
   var unit = size / 4;
 
-  this.context.translate(
-    updatedOptions.x,
-    updatedOptions.y
+  this.drawBoundingBox(options);
+  
+  context.translate(
+    updatedOptions.x + size/2,
+    updatedOptions.y + size/2,
   );
+  
+  context.translate(-size/2 + unit/2, 0);
 
-  this.context.beginPath();
-  this.context.moveTo(0, 0);
-  this.context.lineTo(unit, unit);
-  this.context.lineTo(unit + unit + unit, - unit);
+  context.beginPath();
+  context.moveTo(0, 0);
+  context.lineTo(unit, unit);
+  context.lineTo(unit * 3, -unit);
 
-  this.context.lineCap = updatedOptions.lineCap;
-  this.context.lineJoin = updatedOptions.lineJoin;
-  this.context.lineWidth = updatedOptions.lineWidth;
+  context.strokeStyle = updatedOptions.strokeStyle;
+  context.lineCap = updatedOptions.lineCap;
+  context.lineJoin = updatedOptions.lineJoin;
+  context.lineWidth = updatedOptions.lineWidth;
 
-  this.context.stroke();
-
-  this.context.restore();
+  context.stroke();
+  
+  context.restore();
 };

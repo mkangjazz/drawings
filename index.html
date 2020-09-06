@@ -54,6 +54,7 @@
   </script>
   <script src='./js/updateoptions.js'></script>
   <script src='./js/setdimensions.js'></script>
+  <script src='./js/drawboundingbox.js'></script>
   <script src='./js/drawgrid.js'></script>
   <script src='./js/drawcheckmark.js'></script>
   <script src='./js/drawroundedrectangle.js'></script>
@@ -66,7 +67,13 @@
 //      strokeStyle: 'pink',
 //      lineWidth: 1,
     });
-    c1.drawCheckmark();
+    c1.drawCheckmark({
+      x: 150,
+      y: 150,
+      lineWidth: 8,
+      size: 'large',
+      strokeStyle: 'green',
+    });
 //    canvas.context.restore();
 //    
 //    canvas.context.font = '48px serif';
