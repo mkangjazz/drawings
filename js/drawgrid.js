@@ -1,22 +1,25 @@
-Canvas.prototype.drawGrid = function(){
+Canvas.prototype.drawGrid = function(options){
   var canvas = this.canvas;
   var ctx = this.context;
-
+  var updatedOptions = this.updateOptions(options);
+  var getPixels = this.getPixels;
+  
   function drawLine(){
+    ctx.strokeStyle = updatedOptions.strokeStyle;
+    ctx.lineWidth = updatedOptions.lineWidth;
+    
     ctx.beginPath();
     ctx.moveTo(0, 0);
-    ctx.lineTo(canvas.width * 2, 0);
+    ctx.lineTo(9999, 0);
     ctx.stroke();
   }
 
   function drawHorizontalLines(){
     ctx.save();
-    ctx.strokeStyle = '#dddddd';
-    ctx.strokeWidth = 1;
 
-    var horizontalLineCount = Math.ceil(canvas.height / gridSpacer);
+    var lineCount = Math.ceil(canvas.height / gridSpacer);
 
-    for(var i = 0; i < horizontalLineCount; i++){
+    for(var i = 0; i < lineCount; i++){
       ctx.translate(0, gridSpacer);
       drawLine();
     }
@@ -26,22 +29,20 @@ Canvas.prototype.drawGrid = function(){
 
   function drawVerticalLines(){
     ctx.save();
-    ctx.strokeStyle = '#dddddd';
-    ctx.strokeWidth = 1;
-    ctx.translate(canvas.width, 0);
-    ctx.rotate(90 * Math.PI/180);
 
     var verticalLineCount = Math.ceil(canvas.width / gridSpacer);
 
+    ctx.translate(verticalLineCount * gridSpacer + updatedOptions.lineWidth, 0);
+    
+    ctx.rotate(90 * Math.PI/180);
+    
     for(var i = 0; i < verticalLineCount; i++){
       ctx.translate(0, gridSpacer);
       drawLine();
     }
-
-    ctx.restore();
   }
 
-  var gridSpacer = 10;
+  var gridSpacer = 50;
 
   drawHorizontalLines();
   drawVerticalLines();

@@ -23,19 +23,22 @@ img {
   max-width: 100%;
 }
 .canvas-wrapper {
-  border: 1px solid gray;
+  background-color: #f3f3f3;
   height: 0;
+  margin: 0;
+  overflow: hidden;
   padding: 0 0 200%;
   position: relative;
   width: 100%;
 }
-canvas {
+.canvas-wrapper > div {
   bottom: 0;
-  display: block;
   left: 0;
-  height: 100%;
   position: absolute;
   right: 0;
-  top: 0;
+  top: 0;  
+}
+canvas {
+  height: 100%;
   width: 100%;
 }

@@ -20,12 +20,13 @@
             </div>
             <div class="col">
                 <h2>Canvas Drawings</h2>
-                <div class="canvas-wrapper">
-                  <canvas aria-label='Programmatic drawing of user interface graphics'
+                <figure class="canvas-wrapper">
+                  <div>
+                    <canvas aria-label='Programmatic drawing of user interface graphics'
                           id='target'
-                          role='img'>
-                  </canvas>
-                </div>
+                          role='img'></canvas>
+                  </div>
+              </figure>
             </div>
         </div>
       </section>
@@ -35,23 +36,41 @@
   <script>
     'use strict';
 
-    function Canvas(el){
+    function Canvas(el){      
       this.canvas = el;
       this.context = el.getContext('2d');
+      this.defaultOptions = {
+        x: 0,
+        y: 0,
+        size: 'small',
+        strokeStyle: 'blue',
+        strokeWidth: 1,
+      };
     };
 
-    var canvas = new Canvas(document.querySelector('canvas'));
+    var c1 = new Canvas(document.querySelector('canvas'));
   </script>
+  <script src='./js/updateoptions.js'></script>
   <script src='./js/setdimensions.js'></script>
+  <script src='./js/getPixels.js'></script>
   <script src='./js/drawgrid.js'></script>
   <script src='./js/drawcheckmark.js'></script>
   <script src='./js/drawroundedrectangle.js'></script>
   <script src='./js/drawcheckbox.js'></script>
   <script src='./js/drawboxes.js'></script>
   <script>
-    canvas.setDimensions();
-    canvas.drawGrid();
-    canvas.drawCheckmark();
+    c1.setDimensions();
+    c1.drawGrid({
+      strokeStyle: 'pink',
+      lineWidth: 1,
+    });
+//  canvas.drawCheckmark();
+//    canvas.context.restore();
+//    
+//    canvas.context.font = '48px serif';
+//    canvas.context.fillText('Hello world', 20, 50);
+//    canvas.context.strokeText("Hello world", 0, 100);
+    
 //    canvas.drawRoundedRectangle();
 //    canvas.drawCheckbox();
   </script>

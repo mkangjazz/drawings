@@ -1,12 +1,13 @@
-Canvas.prototype.setDimensions = function(canvas, ctx){
-  var canvas = this.canvas;
-  var ctx = this.context;
+Canvas.prototype.setDimensions = function(){
+  var dpr = window.devicePixelRatio || 1;
+  var rect = this.canvas.parentElement.getBoundingClientRect();
 
-  var devicePixelRatio = window.devicePixelRatio;
-  var initialWidth = canvas.clientWidth;
-  var initialHeight = canvas.clientHeight;
+  this.canvas.width = rect.width * dpr;
+  this.canvas.height = rect.height * dpr;
 
-  canvas.width = Math.floor(initialWidth * devicePixelRatio);
-  canvas.height = Math.floor(initialHeight * devicePixelRatio);
-  ctx.scale(devicePixelRatio, devicePixelRatio);
+  this.context.scale(dpr, dpr);
+
+  this.devicePixelRatio = dpr;
+  
+  return console.log('setDimensions', this);
 };
