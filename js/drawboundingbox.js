@@ -1,10 +1,15 @@
-Canvas.prototype.drawBoundingBox = function(options){
-  var size = this.getSizes(options.size);
+Canvas.prototype.drawBoundingBox = function(x, y, w, h){
+  var lineWidth = 1;
+  
+  this.context.save();
 
-  this.context.save();  
+  this.adjustOriginOffset(lineWidth, lineWidth);
+
+  this.context.lineWidth = lineWidth;
   this.context.strokeStyle = 'magenta';
-  this.context.setLineDash([6]);
-  this.context.strokeRect(options.x, options.y, size, size);
+  this.context.setLineDash([2]);
+  
+  this.context.strokeRect(x, y, w, h);
 
   return this.context.restore();
 };

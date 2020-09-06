@@ -1,123 +1,113 @@
-Canvas.prototype.drawRoundedRectangle = function(){
-//      function drawRoundedRectangle(x, y, width, height, radius){
-//        var box = {
-//          color: 'gray',
-//          width: width,
-//          height: height,
-//          origin: {
-//            x: x,
-//            y: y,
-//          },
-//          radius: radius,
-//          points: function(){
-//            return {
-//              a: {
-//                x: this.origin.x,
-//                y: this.origin.y,
-//              },
-//              b: {
-//                x: this.origin.x + this.getLengthX(),
-//                y: this.origin.y,
-//              },
-//              c: {
-//                x: this.origin.x + this.getLengthX() + this.radius,
-//                y: this.origin.y + this.radius,
-//              },
-//              d: {
-//                x: this.origin.x + this.getLengthX() + this.radius,
-//                y: this.origin.y + this.radius + this.getLengthY(),
-//              },
-//              e: {
-//                x: this.origin.x + this.getLengthX(),
-//                y: this.origin.y + this.radius + this.getLengthY() + this.radius,
-//              },
-//              f: {
-//                x: this.origin.x,
-//                y: this.origin.y + this.radius + this.getLengthY() + this.radius,
-//              },
-//              g: {
-//                x: this.origin.x - this.radius,
-//                y: this.origin.y + this.radius + this.getLengthY(),
-//              },
-//              h: {
-//                x: this.origin.x - this.radius,
-//                y: this.origin.y + this.radius,
-//              },
-//            };
-//          },
-//          controlPoints: function(){
-//            return {
-//              topLeft: {
-//                x: this.origin.x - this.radius,
-//                y: this.origin.y,
-//              },
-//              topRight: {
-//                x: this.origin.x + this.getLengthX() + this.radius,
-//                y: this.origin.y,
-//              },
-//              bottomRight: {
-//                x: this.origin.x + this.getLengthX() + this.radius,
-//                y: this.origin.y + this.radius + this.getLengthY() + this.radius,
-//              },
-//              bottomLeft: {
-//                x: this.origin.x - this.radius,
-//                y: this.origin.y + this.radius + this.getLengthY() + this.radius,
-//              },
-//            };
-//          },
-//          getLengthX: function(){
-//            return (this.width - this.radius - this.radius);
-//          },
-//          getLengthY: function(){
-//            return (this.height - this.radius - this.radius);
-//          },
-//        };
-//
-//        ctx.save();
-//        ctx.translate(box.radius, 0);
-//
-//        ctx.beginPath();
-//        ctx.moveTo(box.points().a.x, box.points().a.y);
-//        ctx.lineTo(box.points().b.x, box.points().b.y);
-//        ctx.quadraticCurveTo(
-//          box.controlPoints().topRight.x,
-//          box.controlPoints().topRight.y,
-//          box.points().c.x,
-//          box.points().c.y,
-//        );
-//        ctx.lineTo(
-//          box.points().d.x,
-//          box.points().d.y,
-//        );
-//        ctx.quadraticCurveTo(
-//          box.controlPoints().bottomRight.x,
-//          box.controlPoints().bottomRight.y,
-//          box.points().e.x,
-//          box.points().e.y,
-//        );
-//        ctx.lineTo(
-//          box.points().f.x,
-//          box.points().f.y,
-//        );
-//        ctx.quadraticCurveTo(
-//          box.controlPoints().bottomLeft.x,
-//          box.controlPoints().bottomLeft.y,
-//          box.points().g.x,
-//          box.points().g.y,
-//        );
-//        ctx.lineTo(
-//          box.points().h.x,
-//          box.points().h.y,
-//        );
-//        ctx.quadraticCurveTo(
-//          box.controlPoints().topLeft.x,
-//          box.controlPoints().topLeft.y,
-//          box.points().a.x,
-//          box.points().a.y,
-//        );
-//
-//        ctx.fillStyle = '#f3f3f3';
-//        ctx.fill();
-//        ctx.restore();
-//      }
+Canvas.prototype.drawRoundedRectangle = function(options){
+  var canvas = this.canvas;
+  var context = this.context;
+  var updatedOptions = this.updateOptions(options);
+
+// width = radius + width + radius
+// height = radius + height + radius
+// var width = updatedOptions.width - (updatedOptions.radius * 2);
+// var height = ;
+
+  function getLength(length){
+    return length - (updatedOptions.radius * 2);
+  }
+  
+  function drawTopLine(){
+    context.lineTo(
+      updatedOptions.x + getLength(updatedOptions.width),
+      updatedOptions.y,
+    );
+  }
+  
+  function drawTopRightCorner(){
+    context.quadraticCurveTo(
+      updatedOptions.x + getLength(updatedOptions.width) + updatedOptions.radius,
+      updatedOptions.y,
+      updatedOptions.x + getLength(updatedOptions.width) + updatedOptions.radius,
+      updatedOptions.y + updatedOptions.radius,
+      updatedOptions.radius,
+    );
+  }
+  
+  function drawRightLine(){
+    context.lineTo(
+      updatedOptions.x + getLength(updatedOptions.width) + updatedOptions.radius,
+      updatedOptions.y + updatedOptions.radius + getLength(updatedOptions.height),
+    );
+  }
+  
+  function drawBottomRightCorner(){
+    context.arcTo(
+      updatedOptions.x + getLength(updatedOptions.width) + updatedOptions.radius,
+      updatedOptions.y + updatedOptions.radius + getLength(updatedOptions.height) + updatedOptions.radius,
+      updatedOptions.x + getLength(updatedOptions.width),
+      updatedOptions.y + updatedOptions.radius + getLength(updatedOptions.height) + updatedOptions.radius,
+      updatedOptions.radius,
+    );
+  }
+  
+  function drawBottomLine(){
+    context.lineTo(
+      updatedOptions.x,
+      updatedOptions.y + updatedOptions.radius + getLength(updatedOptions.height) + updatedOptions.radius,
+    );
+  }
+  
+  function drawBottomLeftCorner(){
+    context.arcTo(
+      updatedOptions.x - updatedOptions.radius,
+      updatedOptions.y + updatedOptions.radius + getLength(updatedOptions.height) + updatedOptions.radius,
+      updatedOptions.x - updatedOptions.radius,
+      updatedOptions.y + updatedOptions.radius + getLength(updatedOptions.height),
+      updatedOptions.radius,
+    );
+  }
+  
+  function drawLeftLine(){
+    context.lineTo(
+      updatedOptions.x - updatedOptions.radius,
+      updatedOptions.y + updatedOptions.radius,
+    );
+  }
+  
+  function drawUpperLeftCorner(){
+    context.arcTo(
+      updatedOptions.x - updatedOptions.radius,
+      updatedOptions.y,
+      updatedOptions.x,
+      updatedOptions.y,
+      updatedOptions.radius,
+    );
+  }
+  
+  context.save();
+
+  this.drawBoundingBox(
+    updatedOptions.x,
+    updatedOptions.y,
+    updatedOptions.width ? updatedOptions.width : size,
+    updatedOptions.height ? updatedOptions.height : size,
+  );
+
+  this.adjustOriginOffset(updatedOptions.lineWidth, updatedOptions.lineWidth);
+
+  context.translate(updatedOptions.radius, 0);
+
+  context.beginPath();
+
+  context.moveTo(updatedOptions.x, updatedOptions.y);
+
+  drawTopLine();
+  drawTopRightCorner();
+  drawRightLine();
+  drawBottomRightCorner(); 
+  drawBottomLine();
+  drawBottomLeftCorner();
+  drawLeftLine();
+  drawUpperLeftCorner();
+  
+  context.fillStyle = updatedOptions.fillStyle;
+  
+  context.stroke();
+  context.restore();
 };
