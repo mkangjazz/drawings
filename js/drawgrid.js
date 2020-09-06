@@ -3,10 +3,37 @@ Canvas.prototype.drawGrid = function(options){
   var ctx = this.context;
   var updatedOptions = this.updateOptions(options);
   
+  function labelAxes(){
+    ctx.save();
+
+    var verticalLineCount = Math.ceil(canvas.width / gridSpacer);
+    var measureText = ctx.measureText('M');
+
+    ctx.translate(measureText.width / 2, measureText.width * 1.5);
+    ctx.font = updatedOptions.font; console.log(updatedOptions);
+    ctx.save();
+    
+    for (var i = 0; i < verticalLineCount; i++){
+      ctx.fillText(i * gridSpacer, 0, 0);
+      ctx.translate(gridSpacer, 0);
+    }
+    
+    ctx.restore();
+
+    var horizontalLineCount = Math.ceil(canvas.height / gridSpacer);
+
+    for (var i = 0; i < horizontalLineCount; i++){
+      ctx.fillText(i * gridSpacer, 0, 0);
+      ctx.translate(0, gridSpacer);
+    }
+
+    ctx.restore();
+  }  
+  
   function drawLine(){
     ctx.strokeStyle = updatedOptions.strokeStyle;
     ctx.lineWidth = updatedOptions.lineWidth;
-    
+
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.lineTo(9999, 0);
@@ -49,4 +76,5 @@ Canvas.prototype.drawGrid = function(options){
 
   drawHorizontalLines();
   drawVerticalLines();
+  labelAxes();
 };
