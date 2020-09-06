@@ -44,7 +44,9 @@
         y: 0,
         size: 'small',
         strokeStyle: 'blue',
-        strokeWidth: 1,
+        lineCap: 'round',
+        lineJoin: 'round',
+        lineWidth: 1,
       };
     };
 
@@ -52,19 +54,19 @@
   </script>
   <script src='./js/updateoptions.js'></script>
   <script src='./js/setdimensions.js'></script>
-  <script src='./js/getPixels.js'></script>
   <script src='./js/drawgrid.js'></script>
   <script src='./js/drawcheckmark.js'></script>
   <script src='./js/drawroundedrectangle.js'></script>
   <script src='./js/drawcheckbox.js'></script>
   <script src='./js/drawboxes.js'></script>
+  <script src='./js/getsizes.js'></script>
   <script>
     c1.setDimensions();
     c1.drawGrid({
-      strokeStyle: 'pink',
-      lineWidth: 1,
+//      strokeStyle: 'pink',
+//      lineWidth: 1,
     });
-//  canvas.drawCheckmark();
+    c1.drawCheckmark();
 //    canvas.context.restore();
 //    
 //    canvas.context.font = '48px serif';

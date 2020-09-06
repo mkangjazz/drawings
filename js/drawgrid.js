@@ -2,7 +2,6 @@ Canvas.prototype.drawGrid = function(options){
   var canvas = this.canvas;
   var ctx = this.context;
   var updatedOptions = this.updateOptions(options);
-  var getPixels = this.getPixels;
   
   function drawLine(){
     ctx.strokeStyle = updatedOptions.strokeStyle;
@@ -19,9 +18,11 @@ Canvas.prototype.drawGrid = function(options){
 
     var lineCount = Math.ceil(canvas.height / gridSpacer);
 
+    ctx.translate(0, updatedOptions.lineWidth);
+    
     for(var i = 0; i < lineCount; i++){
-      ctx.translate(0, gridSpacer);
       drawLine();
+      ctx.translate(0, gridSpacer);
     }
 
     ctx.restore();
@@ -32,14 +33,16 @@ Canvas.prototype.drawGrid = function(options){
 
     var verticalLineCount = Math.ceil(canvas.width / gridSpacer);
 
-    ctx.translate(verticalLineCount * gridSpacer + updatedOptions.lineWidth, 0);
+    ctx.translate(verticalLineCount * gridSpacer - gridSpacer + updatedOptions.lineWidth, 0);
     
     ctx.rotate(90 * Math.PI/180);
     
     for(var i = 0; i < verticalLineCount; i++){
-      ctx.translate(0, gridSpacer);
       drawLine();
+      ctx.translate(0, gridSpacer);
     }
+    
+    ctx.restore();
   }
 
   var gridSpacer = 50;
