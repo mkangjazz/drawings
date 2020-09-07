@@ -1,5 +1,5 @@
 Canvas.prototype.adjustOriginOffset = function(offsetX, offsetY){
-  var boundingBoxWidth = 1;
+  var boundingBoxWidth = 0;
   
-  return this.context.translate(1 + offsetX, 1 + offsetY);
+  return this.context.translate(boundingBoxWidth + offsetX, boundingBoxWidth + offsetY);
 };

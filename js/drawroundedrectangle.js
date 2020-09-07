@@ -2,8 +2,6 @@ Canvas.prototype.drawRoundedRectangle = function(options){
   var canvas = this.canvas;
   var context = this.context;
   var updatedOptions = this.updateOptions(options);
-
-  var size = this.getSizes(updatedOptions.size);
   
   function getLength(length){
     return length - (updatedOptions.radius * 2);
@@ -82,8 +80,8 @@ Canvas.prototype.drawRoundedRectangle = function(options){
   this.drawBoundingBox(
     updatedOptions.x,
     updatedOptions.y,
-    updatedOptions.width ? updatedOptions.width : size,
-    updatedOptions.height ? updatedOptions.height : size,
+    updatedOptions.width,
+    updatedOptions.height,
   );
 
   this.adjustOriginOffset(updatedOptions.lineWidth, updatedOptions.lineWidth);
@@ -103,9 +101,14 @@ Canvas.prototype.drawRoundedRectangle = function(options){
   drawLeftLine();
   drawUpperLeftCorner();
   
-  context.fillStyle = updatedOptions.fillStyle;
-  context.fill();
-  context.stroke();
+  this.conditionallyApplyOptionsToContext(
+    updatedOptions,
+    [
+      'fillStyle',
+      'strokeStyle',
+      'lineWidth',
+    ],
+  );
 
   context.restore();
 };

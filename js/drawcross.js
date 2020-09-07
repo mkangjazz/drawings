@@ -3,10 +3,11 @@ Canvas.prototype.drawCross = function(options){
   var context = this.context;
   var updatedOptions = this.updateOptions(options);
 
-  var size = this.getSizes(updatedOptions.size); // size only works for square...
-  var width = updatedOptions.width ? updatedOptions.width : size;
-  var height = updatedOptions.height ? updatedOptions.height : size;
+  var width = updatedOptions.width;
+  var height = updatedOptions.height;
 
+  context.save();
+  
   this.drawBoundingBox(
     updatedOptions.x,
     updatedOptions.y,
@@ -30,9 +31,16 @@ Canvas.prototype.drawCross = function(options){
     context.lineCap = updatedOptions.lineCap;
     context.lineJoin = updatedOptions.lineJoin;
 
-    // this cascading logic is also screwy
-    context.lineWidth = updatedOptions.lineWidth ? updatedOptions.lineWidth : size / 4;
-    context.stroke();
+    context.lineWidth = updatedOptions.lineWidth;
+    
+    if (updatedOptions.fillStyle) {
+      context.fillStyle = updatedOptions.fillStyle;
+      context.fill();
+    }
+
+    if (updatedOptions.strokeStyle) {
+        context.stroke();   
+    }
     
     context.restore();
   }
@@ -45,7 +53,7 @@ Canvas.prototype.drawCross = function(options){
 
     context.restore();
   }
-  
+
   function drawVerticalLine(){
     context.save();
 
@@ -59,4 +67,6 @@ Canvas.prototype.drawCross = function(options){
 
   drawHorizontalLine();
   drawVerticalLine();
+
+  context.restore();
 };

@@ -3,11 +3,11 @@ Canvas.prototype.drawCheckmark = function(options){
   var context = this.context;
   var updatedOptions = this.updateOptions(options);
 
-  context.save();
-
-  var size = this.getSizes(updatedOptions.size);
+  var size = updatedOptions.width;
   var unit = (size - updatedOptions.lineWidth) / 3;
 
+  context.save();
+  
   this.drawBoundingBox(
     updatedOptions.x,
     updatedOptions.y,

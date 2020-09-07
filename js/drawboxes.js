@@ -3,7 +3,7 @@ Canvas.prototype.drawBoxes = function(options){
   var context = this.context;
   var updatedOptions = this.updateOptions(options);
   
-  var size = this.getSizes(updatedOptions.size);
+  var size = updatedOptions.width;
   var mediumSize = size * 2;
   var largeSize = size * 4;
 
