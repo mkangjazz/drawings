@@ -14,7 +14,10 @@ Canvas.prototype.drawCross = function(options){
     width + updatedOptions.lineWidth,
   );
 
-  this.adjustOriginOffset(updatedOptions.lineWidth / 2, height / 2 + updatedOptions.lineWidth / 2);
+  this.adjustOriginOffset(
+    updatedOptions.lineWidth / 2,
+    height / 2 + updatedOptions.lineWidth / 2
+  );
   
   function drawLine(len){
     context.save();
