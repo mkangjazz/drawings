@@ -8,57 +8,91 @@ Canvas.prototype.drawBoxes = function(options){
   var largeSize = size * 4;
 
   function drawTopBox(){
+    function drawLeftSide(){
+      context.beginPath();
+      context.moveTo(0, 0);
+      context.lineTo(0 - size/12 * 3, 0 + size/12);
+      context.lineTo(0 - size/12 * 3, 0 + size);
+      context.lineTo(0, 0 + size);
+      context.closePath();
+      context.fill();
+    }
+
+    function drawRightSide(){
+       context.fillRect(0, 0, size, size); 
+    }
+
     context.save();
     context.translate(updatedOptions.x, updatedOptions.y);
-
     context.fillStyle = updatedOptions.fillStyle;
-    context.fillRect(0, 0, size, size);
-
-    // function to calculate a shade/tint of a color?
-    context.fillStyle = '#777777';
-    context.beginPath();
-    context.moveTo(0, 0);
-    context.lineTo(0 - size/4, 0 + size/4);
-    context.lineTo(0 - size/4, 0 + size);
-    context.lineTo(0, 0 + size);
-    context.closePath();
-    context.fill();
     
+    drawRightSide();
+    drawLeftSide();
+
+    context.fillStyle = 'rgba(255, 255, 255, .25)';
+
+    drawLeftSide();
+
     context.restore();
   }
   
   function drawMiddleBox(){
+    function drawRightSide(){
+      context.fillRect(0, 0, mediumSize, mediumSize);
+    }
+
+    function drawLeftSide(){
+      context.beginPath();
+      context.moveTo(0, 0);
+      context.lineTo(0 - mediumSize / 4, mediumSize / 4);
+      context.lineTo(0 - mediumSize / 4, mediumSize);
+      context.lineTo(0, mediumSize);
+      context.closePath();
+      context.fill();
+    }
+    
+    function drawLeftTop(){
+      context.beginPath();
+      context.moveTo(0,0);
+      context.lineTo(0 - mediumSize / 12 * 3, 0);
+      context.lineTo(0 - mediumSize / 12 * 4, mediumSize / 4);
+      context.lineTo(0 - mediumSize / 12 * 1, mediumSize / 4);
+      context.fill();  
+    }
+    
+    function drawRightTop(){
+      context.beginPath();
+      context.moveTo(0,0);
+      context.lineTo(0 + mediumSize, 0);
+      context.lineTo(0 + mediumSize + mediumSize / 12, mediumSize / 4);
+      context.lineTo(0 + mediumSize / 12 * 1, mediumSize / 4);
+      context.closePath();
+      context.fill();
+    }
+
     context.save();
     context.translate(updatedOptions.x - 2 * size / 3, updatedOptions.y + size);
 
-    context.fillStyle = '#000';
-    context.fillRect(0, 0, mediumSize, mediumSize);
+    context.fillStyle = updatedOptions.fillStyle;
 
-    context.fillStyle = '#777777';
-    context.beginPath();
-    context.moveTo(0, 0);
-    context.lineTo(0 - mediumSize / 4, mediumSize / 4);
-    context.lineTo(0 - mediumSize / 4, mediumSize);
-    context.lineTo(0, mediumSize);
-    context.closePath();
-    context.fill();
+    drawLeftSide();
+    drawRightSide();
 
-    context.fillStyle = '#000';
-    context.beginPath();
-    context.moveTo(0,0);
-    context.lineTo(0 - mediumSize / 12 * 3, 0);
-    context.lineTo(0 - mediumSize / 12 * 4, mediumSize / 4);
-    context.lineTo(0 - mediumSize / 12 * 1, mediumSize / 4);
-    context.fill();
+    context.fillStyle = 'rgba(255, 255, 255, .5)';
+    drawRightSide();
     
-    context.fillStyle = '#777';
-    context.beginPath();
-    context.moveTo(0,0);
-    context.lineTo(0 + mediumSize, 0);
-    context.lineTo(0 + mediumSize + mediumSize / 12, mediumSize / 4);
-    context.lineTo(0 + mediumSize / 12 * 1, mediumSize / 4);
-    context.closePath();
-    context.fill();
+    context.fillStyle = 'rgba(255, 255, 255, .75)';
+    drawLeftSide();
+    
+    context.fillStyle = updatedOptions.fillStyle;
+    drawLeftTop();
+    drawRightTop();
+    
+    context.fillStyle = 'rgba(255,255,255,.75)';
+    drawRightTop();
+    
+    context.fillStyle = 'rgba(255, 255, 255, .5)';
+    drawLeftTop();
     
     context.restore();
   }
@@ -71,16 +105,26 @@ Canvas.prototype.drawBoxes = function(options){
       updatedOptions.y + size + mediumSize
     );
 
-    context.fillRect(0, 0, largeSize, largeSize);
-    
-    context.fillStyle = '#777';
-    context.fillRect(largeSize / 2 - mediumSize / 4, 0, mediumSize / 2, mediumSize / 3);
-    context.fillRect(largeSize / 2 - mediumSize / 4, largeSize - mediumSize / 3, mediumSize / 2, mediumSize / 3);
+    function drawBigBox(){
+      context.fillRect(0, 0, largeSize, largeSize);      
+    }
 
+    function drawSmallBoxes(){
+      context.fillRect(largeSize / 2 - mediumSize / 4, 0, mediumSize / 2, mediumSize / 3);
+      context.fillRect(largeSize / 2 - mediumSize / 4, largeSize - mediumSize / 3, mediumSize / 2, mediumSize / 3);
+    }
+    
+    context.fillStyle = updatedOptions.fillStyle;
+    drawBigBox();
+    drawSmallBoxes();
+
+    context.fillStyle = 'rgba(255, 255, 255, .75)';
+    drawSmallBoxes();
+    
     context.restore();
   }
 
-  drawTopBox();
+  drawTopBox.call(this);
 
   drawMiddleBox();
 
