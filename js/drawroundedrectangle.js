@@ -3,6 +3,8 @@ Canvas.prototype.drawRoundedRectangle = function(options){
   var context = this.context;
   var updatedOptions = this.updateOptions(options);
 
+  var size = this.getSizes(updatedOptions.size);
+  
   function getLength(length){
     return length - (updatedOptions.radius * 2);
   }

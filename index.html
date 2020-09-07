@@ -43,7 +43,7 @@
         x: 0,
         y: 0,
         font: '16px sans-serif',
-        size: 'small',
+        size: 'small', // how should size, width, height interact...?
         height: 40,
         width: 40,
         lineCap: 'round',
@@ -52,8 +52,6 @@
         radius: .25 * 40,
       };
     };
-
-    var c1 = new Canvas(document.querySelector('canvas'));
   </script>
   <script src='./js/updateoptions.js'></script>
   <script src='./js/setdimensions.js'></script>
@@ -68,34 +66,7 @@
   <script src='./js/drawcheckbox.js'></script>
   <script src='./js/drawboxes.js'></script>
   <script src='./js/drawanglebracket.js'></script>
-  <script>
-    c1.setDimensions();
-
-    c1.drawGrid({
-      strokeStyle: '#fff',
-      font: '9px sans-serif',
-    });
-
-    c1.drawRoundedRectangle({
-      x: 250,
-      y: 100,
-      fillStyle: '#333',
-      size: 'large',
-    });
-    c1.drawCheckmark({
-      x: 260,
-      y: 114,
-      lineWidth: 4,
-      size: 'small',
-      strokeStyle: 'white',
-    });
-
-    c1.drawBoxes({
-      x: 200,
-      y: 400,
-      size: 'medium',
-      fillStyle: 'green',
-    });
-    
-  </script>
+  <script src='./js/drawcross.js'></script>
+  
+  <script src='./js/_drawings.js'></script>
 </html>

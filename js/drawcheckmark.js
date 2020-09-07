@@ -26,7 +26,6 @@ Canvas.prototype.drawCheckmark = function(options){
   context.lineCap = updatedOptions.lineCap;
   context.lineJoin = updatedOptions.lineJoin;
   context.lineWidth = updatedOptions.lineWidth ? updatedOptions.lineWidth : size / 10;
-
   context.stroke();
   
   context.restore();
