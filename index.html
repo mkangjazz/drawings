@@ -43,10 +43,9 @@
         x: 0,
         y: 0,
         font: '16px sans-serif',
-        size: 'small', // maybe this is a shorthand? for L, W?
+        size: 'small',
         height: 40,
         width: 40,
-        strokeStyle: 'blue',
         lineCap: 'round',
         lineJoin: 'round',
         lineWidth: 1,
@@ -70,41 +69,31 @@
   <script src='./js/drawanglebracket.js'></script>
   <script>
     c1.setDimensions();
+
     c1.drawGrid({
       strokeStyle: '#fff',
       font: '9px sans-serif',
     });
-    c1.drawCheckmark({
-      x: 150,
-      y: 150,
-      lineWidth: 8,
-      size: 'large',
-      strokeStyle: 'green',
-    });    
+
     c1.drawRoundedRectangle({
-      x: 50,
-      y: 50,
+      x: 250,
+      y: 100,
+      fillStyle: '#333',
       size: 'large',
-      width: 100,
-      height: 30,
-      radius: 10,
-    });
-    c1.drawRoundedRectangle({
-      x: 0,
-      y: 0,
-      size: 'small',
     });
     c1.drawCheckmark({
       x: 260,
       y: 114,
       lineWidth: 4,
       size: 'small',
-      strokeStyle: 'green',
-    });    
-    c1.drawRoundedRectangle({
-      x: 250,
-      y: 100,
-      size: 'large',
+      strokeStyle: 'white',
     });
+
+    c1.drawBoxes({
+      x: 200,
+      y: 200,
+      fillStyle: 'green',
+    });
+    
   </script>
 </html>
