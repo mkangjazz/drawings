@@ -65,3 +65,11 @@ c1.drawRoundedRectangle({
   height: 20,
   radius: 6,
 });
+
+c1.drawAngleBracket({
+  x: 100,
+  y: 25,
+  lineWidth: 5,
+  strokeStyle: 'green',
+  width: 30,
+});

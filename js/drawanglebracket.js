@@ -5,29 +5,36 @@ Canvas.prototype.drawAngleBracket = function(options){
 
   context.save();
 
-  var size = this.getSizes(updatedOptions.size);
-  var unit = size / 4;
-
-  this.drawBoundingBox(options);
+  var size = updatedOptions.width;
+  var unit = (size - updatedOptions.lineWidth) / 2;
   
-  context.translate(
-    updatedOptions.x + size/2,
-    updatedOptions.y + size/2,
+  this.drawBoundingBox(
+    updatedOptions.x,
+    updatedOptions.y,
+    size,
+    size / 2 + updatedOptions.lineWidth / 2,
   );
-  
-  context.translate(-size/2 + unit/2, 0);
+
+  context.translate(
+    updatedOptions.x + updatedOptions.lineWidth / 2,
+    updatedOptions.y + updatedOptions.lineWidth / 2,
+  );
 
   context.beginPath();
   context.moveTo(0, 0);
   context.lineTo(unit, unit);
-  context.lineTo(unit * 3, -unit);
+  context.lineTo(unit * 2, 0);
 
-  context.strokeStyle = updatedOptions.strokeStyle;
-  context.lineCap = updatedOptions.lineCap;
-  context.lineJoin = updatedOptions.lineJoin;
-  context.lineWidth = updatedOptions.lineWidth;
+  this.conditionallyApplyOptionsToContext(
+    updatedOptions,
+    [
+      'fillStyle',
+      'strokeStyle',
+      'lineWidth',
+      'lineCap',
+      'lineJoin',
+    ],
+  );
 
-  context.stroke();
-  
   context.restore();
 };

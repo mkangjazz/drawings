@@ -22,11 +22,16 @@ Canvas.prototype.drawCheckmark = function(options){
   context.lineTo(updatedOptions.x + unit, updatedOptions.y + unit);
   context.lineTo(updatedOptions.x + unit * 3, updatedOptions.y - unit);
 
-  context.strokeStyle = updatedOptions.strokeStyle;
-  context.lineCap = updatedOptions.lineCap;
-  context.lineJoin = updatedOptions.lineJoin;
-  context.lineWidth = updatedOptions.lineWidth ? updatedOptions.lineWidth : size / 10;
-  context.stroke();
+  this.conditionallyApplyOptionsToContext(
+    updatedOptions,
+    [
+      'fillStyle',
+      'strokeStyle',
+      'lineWidth',
+      'lineCap',
+      'lineJoin',
+    ],
+  );
   
   context.restore();
 };
