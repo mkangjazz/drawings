@@ -3,7 +3,10 @@ Canvas.prototype.drawBoundingBox = function(x, y, w, h){
   
   this.context.save();
 
-  this.adjustOriginOffset(lineWidth, lineWidth);
+  this.adjustOriginOffset(
+    lineWidth/2,
+    lineWidth/2,
+  );
 
   this.context.lineWidth = lineWidth,
   this.strokeStyle = 'magenta',

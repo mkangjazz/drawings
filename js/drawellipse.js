@@ -16,8 +16,8 @@ Canvas.prototype.drawEllipse = function(options){
   );
 
   this.adjustOriginOffset(
-    updatedOptions.lineWidth,
-    updatedOptions.lineWidth,
+    updatedOptions.lineWidth / 2,
+    updatedOptions.lineWidth / 2,
   );
   
   context.translate(
@@ -44,6 +44,8 @@ Canvas.prototype.drawEllipse = function(options){
   
   // reset scaling stroke
   context.restore();
+  
+  context.save();
   
   this.conditionallyApplyOptionsToContext(
     updatedOptions,

@@ -58,8 +58,8 @@ c1.drawRoundedRectangle({
 });
 
 c1.drawRoundedRectangle({
-  x: 162,
-  y: 60,
+  x: 161,
+  y: 61,
   lineWidth: 4,
   strokeStyle: 'white',
   width: 20,
@@ -122,3 +122,42 @@ c1.drawEllipse({
   lineWidth: 4,
 });
 
+c1.drawRoundedRectangle({
+  x: 50,
+  y: 150,
+  fillStyle: 'purple',
+  radius: 10,
+  width: 100,
+  height: 40,
+  lineWidth: 0,
+  strokeStyle: 'rgba(0,0,0,0)',
+});
+
+c1.drawRoundedRectangle({
+  x: 50,
+  y: 150,
+  fillStyle: (function(){
+    var gradient = c1.context.createLinearGradient(50, 150, 150, 150);
+
+    gradient.addColorStop(0, 'rgba(255,255,255, .125)');
+    gradient.addColorStop(1, 'rgba(255,255,255, .5)');
+    
+    return gradient;
+  })(),
+  strokeStyle: 'rgba(0,0,0,0)',
+  lineWidth: 0,
+  radius: 4,
+  width: 100,
+  height: 40,
+});
+
+c1.drawRoundedRectangle({
+  x: 133,
+  y: 155,
+  fillStyle: 'rgba(0, 0, 0, .25)',
+  radius: 5,
+  width: 10,
+  height: 30,
+  lineWidth: 0,
+  strokeStyle: 'rgba(0,0,0,0)',
+});
