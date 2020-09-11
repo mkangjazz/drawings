@@ -35,8 +35,8 @@ c1.drawEllipse({
   y: 100,
   size: 'large',
   fillStyle: 'purple',
-// how to adjust for ellipse... squish how?
-// according to height and width? 
+  // how to adjust for ellipse... squish how?
+  // according to height and width?
 });
 
 c1.drawCross({
@@ -50,15 +50,16 @@ c1.drawCross({
 });
 
 c1.drawRoundedRectangle({
-  x: 200,
+  x: 150,
   y: 50,
-  fillStyle: 'blue',
-//  width:;
+  fillStyle: 'lightblue',
+  lineWidth: 8,
+  strokeStyle: 'pink'
 });
 
 c1.drawRoundedRectangle({
-  x: 206.5,
-  y: 57,
+  x: 162,
+  y: 60,
   lineWidth: 4,
   strokeStyle: 'white',
   width: 20,
@@ -73,3 +74,51 @@ c1.drawAngleBracket({
   strokeStyle: 'green',
   width: 30,
 });
+
+c1.drawRoundedRectangle({
+  x: 250,
+  y: 50,
+  fillStyle: '#eee',
+  lineWidth: 1,
+  radius: 0,
+  strokeStyle: 'transparent',
+  width: 80,
+});
+
+c1.drawEllipse({
+  x: 283 - 20,
+  y: 65,
+  height: 10,
+  width: 10,
+});
+
+c1.drawEllipse({
+  x: 283,
+  y: 65,
+  height: 10,
+  width: 10,
+});
+
+c1.drawEllipse({
+  x: 283 + 20,
+  y: 65,
+  height: 10,
+  width: 10,
+});
+
+c1.drawEllipse({
+  x: 350,
+  y: 50,
+  height: 60,
+  width: 30,
+});
+
+c1.drawEllipse({
+  x: 400,
+  y: 50,
+  height: 30,
+  width: 60,
+  strokeStyle: 'teal',
+  lineWidth: 4,
+});
+

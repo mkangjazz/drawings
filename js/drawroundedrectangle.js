@@ -80,16 +80,18 @@ Canvas.prototype.drawRoundedRectangle = function(options){
   this.drawBoundingBox(
     updatedOptions.x,
     updatedOptions.y,
-    updatedOptions.width,
-    updatedOptions.height,
+    updatedOptions.width + updatedOptions.lineWidth,
+    updatedOptions.height + updatedOptions.lineWidth,
   );
 
-  this.adjustOriginOffset(updatedOptions.lineWidth, updatedOptions.lineWidth);
+  this.adjustOriginOffset(
+    updatedOptions.radius +  updatedOptions.lineWidth / 2,
+    updatedOptions.lineWidth / 2,
+  );
 
-  context.translate(updatedOptions.radius, 0);
+//  context.translate(updatedOptions.radius, 0);
 
   context.beginPath();
-
   context.moveTo(updatedOptions.x, updatedOptions.y);
 
   drawTopLine();
