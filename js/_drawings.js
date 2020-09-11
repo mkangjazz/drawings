@@ -57,8 +57,8 @@ c1.drawRoundedRectangle({
 });
 
 c1.drawRoundedRectangle({
-  x: 210,
-  y: 80,
+  x: 206.5,
+  y: 57,
   lineWidth: 4,
   strokeStyle: 'white',
   width: 20,
