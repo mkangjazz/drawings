@@ -11,13 +11,13 @@ Canvas.prototype.drawAngleBracket = function(options){
   this.drawBoundingBox(
     updatedOptions.x,
     updatedOptions.y,
-    size + updatedOptions.lineWidth / 2,
-    size / 2 + updatedOptions.lineWidth / 2,
+    size,
+    size / 2,
   );
 
-  context.translate(
-    updatedOptions.x + updatedOptions.lineWidth,
-    updatedOptions.y + updatedOptions.lineWidth,
+  this.adjustOriginOffset(
+    updatedOptions.x + updatedOptions.lineWidth / 2,
+    updatedOptions.y + updatedOptions.lineWidth / 2,
   );
 
   context.beginPath();

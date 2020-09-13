@@ -9,7 +9,7 @@ Canvas.prototype.conditionallyApplyOptionsToContext = function(options, arr){
       context[key] = options[key];
     }
   }
-  
+
   if (
     arr.indexOf('strokeStyle') !== -1 &&
     options.hasOwnProperty('strokeStyle') ||

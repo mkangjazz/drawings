@@ -89,8 +89,6 @@ Canvas.prototype.drawRoundedRectangle = function(options){
     updatedOptions.lineWidth / 2,
   );
 
-//  context.translate(updatedOptions.radius, 0);
-
   context.beginPath();
   context.moveTo(updatedOptions.x, updatedOptions.y);
 
