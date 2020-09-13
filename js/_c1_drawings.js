@@ -298,34 +298,72 @@ c1.drawRoundedRectangle({
   fillStyle: (function(){
     var gradient = c1.context.createLinearGradient(350, 200, 450, 200);
 
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    gradient.addColorStop(1, 'rgba(0, 0, 255, .75)');
+    gradient.addColorStop(0, 'rgba(255, 255, 255, .95)');
+    gradient.addColorStop(1, 'rgba(0, 0, 255, .85)');
 
     return gradient;
   })(),
-  strokeStyle: (function(){
-    var gradient = c1.context.createLinearGradient(350, 100, 450, 200);
-
-    gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
-    gradient.addColorStop(.5, 'rgba(255, 255, 255, 0)');
-    gradient.addColorStop(1, 'rgba(255, 0, 0, 1)');
-
-    return gradient;
-  })(),
-  lineWidth: 4,
+  strokeStyle: 'transparent',
+  lineWidth: 2,
   height: 30,
   width: 100,
   radius: 15,
 });
 
+c1.context.save();
+c1.context.beginPath();
+c1.context.moveTo(420, 200);
+c1.context.lineTo(420, 230);
+c1.context.lineTo(375, 230);
+c1.context.lineTo(375, 300);
+c1.context.lineTo(500, 300);
+c1.context.lineTo(500, 200);
+c1.context.closePath();
+c1.context.clip();
+c1.drawRoundedRectangle({
+  x: 350,
+  y: 200,
+  fillStyle: 'transparent',
+  strokeStyle: 'magenta',
+  lineWidth: 2,
+  height: 30,
+  width: 100,
+  radius: 15,
+});
+c1.context.restore();
+
 c1.drawRoundedRectangle({
   x: 359,
   y: 209,
   fillStyle: 'blue',
+  strokeStyle: 'transparent',
+  lineWidth: 2,
   height: 12,
   width: 80,
   radius: 6,
 });
+
+c1.context.save();
+c1.context.beginPath();
+c1.context.moveTo(420, 200);
+c1.context.lineTo(420, 214);
+c1.context.lineTo(400, 214);
+c1.context.lineTo(400, 300);
+c1.context.lineTo(500, 300);
+c1.context.lineTo(500, 200);
+c1.context.closePath();
+c1.context.clip();
+c1.drawRoundedRectangle({
+  x: 359,
+  y: 209,
+  fillStyle: 'transparent',
+  lineWidth: 2,
+  strokeStyle: 'magenta',
+  height: 12,
+  width: 80,
+  radius: 6,
+});
+c1.context.restore();
 
 c1.drawRoundedRectangle({
   x: 0,
@@ -363,4 +401,35 @@ c1.drawRoundedRectangle({
   lineWidth: 0,
 });
 
-//c1.drawFancyButton();
+c1.drawEllipse({
+  x: 250,
+  y: 200,
+  fillStyle: (function(){
+    var gradient = c1.context.createLinearGradient(240, 200, 280, 280);
+
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    gradient.addColorStop(1, 'rgba(0, 155, 55, .75)');
+
+    return gradient;
+  })(),
+  strokeStyle: 'transparent',
+  lineWidth: 2,
+  height: 80,
+  width: 80,
+});
+
+c1.context.save();
+c1.context.translate(292, 242);
+for (var i = 0; i < 360; i++) {
+  console.log('draw', i, i/360);
+  c1.context.fillStyle = 'rgba(255, 0, 0, ' + i/1080 + ')';
+  c1.context.fillRect(40, 0, 2, 2);
+  c1.context.rotate(1 * Math.PI / 180);
+}
+c1.context.restore();
+
+
+
+
+
+
