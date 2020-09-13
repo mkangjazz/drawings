@@ -269,11 +269,73 @@ for (var i = 0; i < 12; i++) {
   c1.drawEllipse({
     x: 0,
     y: 0,
-//    height:,
-//    width:,
     fillStyle: 'rgba(0, 100, 100, ' + i/12 + ')',
   });
   c1.context.restore();
 }
+
+c1.drawRoundedRectangle({
+  x: 350,
+  y: 150,
+  fillStyle: 'white',
+  height: 30,
+  width: 100,
+  radius: 15,
+});
+
+c1.drawRoundedRectangle({
+  x: 359,
+  y: 158,
+  fillStyle: 'blue',
+  height: 12,
+  width: 80,
+  radius: 6,
+});
+
+//c1.drawRoundedRectangle({
+//  x: 350,
+//  y: 200,
+//  fillStyle: 'blue',
+//  strokeStyle: 'red',
+//  lineWidth: 4,
+//  height: 30,
+//  width: 100,
+//  radius: 15,
+//});
+
+c1.drawRoundedRectangle({
+  x: 350,
+  y: 200,
+  fillStyle: (function(){
+    var gradient = c1.context.createLinearGradient(350, 200, 450, 200);
+
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    gradient.addColorStop(1, 'rgba(0, 0, 255, .75)');
+
+    return gradient;
+  })(),
+  strokeStyle: (function(){
+    var gradient = c1.context.createLinearGradient(350, 100, 450, 200);
+
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 0)');
+    gradient.addColorStop(.5, 'rgba(255, 255, 255, 0)');
+    gradient.addColorStop(1, 'rgba(255, 0, 0, 1)');
+
+    return gradient;
+  })(),
+  lineWidth: 4,
+  height: 30,
+  width: 100,
+  radius: 15,
+});
+
+c1.drawRoundedRectangle({
+  x: 359,
+  y: 209,
+  fillStyle: 'blue',
+  height: 12,
+  width: 80,
+  radius: 6,
+});
 
 //c1.drawFancyButton();
