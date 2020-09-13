@@ -23,13 +23,6 @@ c1.drawCheckmark({
   width: 24,
 });
 
-c1.drawBoxes({
-  x: 200,
-  y: 400,
-  size: 'medium',
-  fillStyle: 'green',
-});
-
 c1.drawEllipse({
   x: 204,
   y: 50,
