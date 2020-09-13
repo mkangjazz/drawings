@@ -292,17 +292,6 @@ c1.drawRoundedRectangle({
   radius: 6,
 });
 
-//c1.drawRoundedRectangle({
-//  x: 350,
-//  y: 200,
-//  fillStyle: 'blue',
-//  strokeStyle: 'red',
-//  lineWidth: 4,
-//  height: 30,
-//  width: 100,
-//  radius: 15,
-//});
-
 c1.drawRoundedRectangle({
   x: 350,
   y: 200,
@@ -336,6 +325,42 @@ c1.drawRoundedRectangle({
   height: 12,
   width: 80,
   radius: 6,
+});
+
+c1.drawRoundedRectangle({
+  x: 0,
+  y: 220,
+  fillStyle: '#ccc',
+  height: 40,
+  width: 100,
+  radius: 0,
+});
+
+c1.context.save();
+c1.context.translate(25, 240);
+c1.context.rotate(90 * Math.PI / 180);
+c1.drawTriangle({
+  x: 0,
+  y: 0,
+  angle: 60,
+  base: 20,
+  height : 17.3,
+  strokeStyle: 'transparent',
+  lineWidth: 0,
+  fillStyle: 'green',
+});
+
+c1.context.restore();
+
+c1.drawRoundedRectangle({
+  x: 20,
+  y: 239,
+  radius: 0,
+  height: 2,
+  width: 80,
+  fillStyle: 'green',
+  strokeStyle: 'transparent',
+  lineWidth: 0,
 });
 
 //c1.drawFancyButton();
