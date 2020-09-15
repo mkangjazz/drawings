@@ -2,6 +2,8 @@ var c1 = new Canvas(document.querySelector('canvas'));
 
 c1.setDimensions();
 
+c1.getPixelCoordinates();
+
 c1.drawGrid({
   strokeStyle: '#fff',
   font: '9px sans-serif',
@@ -211,16 +213,16 @@ c1.drawTriangle({
 });
 
 c1.drawTriangle({
-  x: 70,
+  x: 72,
   y: 50,
   angle: 80,
-  base: 80,
+  base: 70,
   height: 40,
   fillStyle: 'blue',
 });
 
 c1.drawTriangle({
-  x: 25,
+  x: 15,
   y: 50,
   angle: 60,
   base: 50,
@@ -375,7 +377,7 @@ c1.drawRoundedRectangle({
 });
 
 c1.context.save();
-c1.context.translate(25, 240);
+c1.context.translate(25, 230);
 c1.context.rotate(90 * Math.PI / 180);
 c1.drawTriangle({
   x: 0,
@@ -421,15 +423,50 @@ c1.drawEllipse({
 c1.context.save();
 c1.context.translate(292, 242);
 for (var i = 0; i < 360; i++) {
-  console.log('draw', i, i/360);
   c1.context.fillStyle = 'rgba(255, 0, 0, ' + i/1080 + ')';
   c1.context.fillRect(40, 0, 2, 2);
   c1.context.rotate(1 * Math.PI / 180);
 }
 c1.context.restore();
 
+c1.drawRoundedRectangle({
+  x: 130,
+  y: 225,
+  height: 60,
+  width: 60,
+  fillStyle: 'green',
+  strokeStyle: 'transparent',
+  lineWidth: 0,
+});
 
+c1.context.save();
+c1.context.translate(139, 260);
+c1.context.rotate(-90 * Math.PI / 180);
+c1.drawTriangle({
+  x: 0,
+  y: 0,
+  angle: 90,
+  base: 20,
+  height: 20,
+  fillStyle: 'white',
+  strokeStyle: 'white',
+  lineWidth: 3,
+  lineJoin: 'round',
+});
+c1.context.restore();
 
-
-
-
+c1.context.save();
+c1.context.translate(183, 252);
+c1.context.rotate(90 * Math.PI / 180);
+c1.drawTriangle({
+  x: 0,
+  y: 0,
+  angle: 90,
+  base: 20,
+  height: 20,
+  fillStyle: 'white',
+  strokeStyle: 'white',
+  lineWidth: 3,
+  lineJoin: 'round',
+});
+c1.context.restore();
