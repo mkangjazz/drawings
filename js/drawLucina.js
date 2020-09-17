@@ -14,7 +14,7 @@ Canvas.prototype.drawLucina = function(options){
       // create offscreenCanvas to use and mirror on our normal canvas
     }
     
-    function hair(){
+    function hairBackground(){
       context.save();
       
       context.beginPath();
@@ -64,16 +64,42 @@ Canvas.prototype.drawLucina = function(options){
 
       leftShape();
       
-      context.closePath();
+//      context.closePath();
       
-      context.fillStyle = 'rgba(255,0,0,.5)';
-      context.fill();
+//      context.fillStyle = 'rgba(255,0,0,.5)';
+//      context.fill();
+      context.strokeStyle = 'magenta';
+      context.lineWidth = 4;
+      context.lineJoin = 'round';
+      context.stroke();
       context.restore();
     }
     
+    function hairForeground(){
+      
+    }
+    
+    function faceAndEars(){
+      
+    }
+    
+    function eyebrows(){
+      
+    }
+    
+    function tiara(){
+      
+    }
+    
+    function necklace(){
+      
+    }
+    
     context.drawImage(image, 50, 50);
-    hair();
 
+    hairBackground();
+
+    tiara();
   });
   
   context.restore();
