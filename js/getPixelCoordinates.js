@@ -3,7 +3,7 @@ Canvas.prototype.getPixelCoordinates = function(){
   var context = this.context;
   
   var textBox = (function(){
-    var el = document.createElement('p');
+    var el = document.createElement('small');
     
     el.innerHTML = `x: <span class="x"></span> | y: <span class="y"></span>`;
     
