@@ -9,15 +9,8 @@ c2.drawGrid({
   strokeStyle: '#fff',
 });
 
-//c2.drawBoxes({
-//  x: 110,
-//  y: 25,
-//  size: 'small',
-//  fillStyle: 'green',
-//});
-
 c2.drawLucina({
 });
 
-//c2.drawKingKRool({
-//});
+c2.drawKKR({
+});

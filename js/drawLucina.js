@@ -9,7 +9,7 @@ Canvas.prototype.drawLucina = function(options){
 
   image.src = './img/lucina.jpg';
 
-  image.addEventListener('load', function(e){    
+  image.addEventListener('load', function(e){
     function silhouetteOutline(strokeOrFill){
       function leftShape(){
         context.moveTo(200, 222);
@@ -120,12 +120,18 @@ Canvas.prototype.drawLucina = function(options){
           200, 149,
           200, 149,
         );
+        
+        context.save();
 
         context.fillStyle = '#2c3a77';
         context.fill();
+        
+        context.restore();
       }
       
       function bangDetail(){
+        context.save();
+
         context.beginPath();
         context.moveTo(204, 155);
         context.bezierCurveTo(
@@ -148,6 +154,8 @@ Canvas.prototype.drawLucina = function(options){
 
         context.fillStyle = '#2c3a77';
         context.fill();
+        
+        context.restore();
       }
       
       context.save();
@@ -187,9 +195,13 @@ Canvas.prototype.drawLucina = function(options){
           200, 95,
           200, 95,
         );
+        
+        context.save();
 
         context.fillStyle = '#f0d6bf';
         context.fill();
+        
+        context.restore();
       }
       
       context.save();
@@ -236,10 +248,6 @@ Canvas.prototype.drawLucina = function(options){
     }
     
     function tiara(){
-      context.save();
-      
-      context.beginPath();
-
       function leftShape(){
         context.moveTo(200, 90);
         context.bezierCurveTo(
@@ -259,6 +267,10 @@ Canvas.prototype.drawLucina = function(options){
         );
       }
 
+      context.save();
+      
+      context.beginPath();
+
       leftShape();
       
       context.translate(400, 0);
@@ -268,6 +280,8 @@ Canvas.prototype.drawLucina = function(options){
       
       context.fillStyle = '#bab630';
       context.fill();
+      
+      context.restore();
     }
     
     function hairSides(){      
@@ -284,6 +298,7 @@ Canvas.prototype.drawLucina = function(options){
           161, 200,
           161, 183,
         );
+
         context.lineTo(160, 163);
         context.lineTo(200, 163);
         
@@ -341,15 +356,28 @@ Canvas.prototype.drawLucina = function(options){
       context.restore();
     }
     
-    silhouetteOutline('fill'),
-    hairSides();
-    faceAndEars();
-    eyebrows();
-    necklace();
-    hairForeground();
-    tiara();
-    silhouetteOutline('stroke');
-    
+
+    var i = 250;
+
+    setTimeout(function(){
+     silhouetteOutline('fill'); 
+    }, i * 1);
+
+    setTimeout(hairSides, i * 2);
+
+    setTimeout(faceAndEars, i * 3);
+
+    setTimeout(eyebrows, i * 4);
+
+    setTimeout(necklace, i * 5);
+
+    setTimeout(hairForeground, i * 6);
+
+    setTimeout(tiara, i * 7);
+
+    setTimeout(function(){
+     silhouetteOutline('stroke'); 
+    }, i * 8);
   });
   
   context.restore();
